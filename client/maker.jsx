@@ -9,13 +9,18 @@ const handleChar = (e, onCharAdded) => {
   helper.hideError();
 
   const name = e.target.querySelector('#charName').value;
+  const altname = e.target.querySelector('#altName').value;
+  const path = e.target.querySelector('#path').value;
+  const type = e.target.querySelector('#type').value;
+  const assoc = e.target.querySelector('#assoc').value;
+  const rarity = e.target.querySelector('#rarity').value;
 
-  if (!name) {
+  if (!name || !path || !type || !assoc || !rarity) {
     helper.handleError('Field required');
     return false;
   }
 
-  helper.sendPost(e.target.action, { name }, onCharAdded);
+  helper.sendPost(e.target.action, { name, altname, path, type, assoc, rarity }, onCharAdded);
   return false;
 };
 
@@ -24,12 +29,22 @@ const CharForm = (props) => {
         <form id='charForm' //not actuall error - eslint hates me
         onSubmit={(e) => handleChar(e, props.triggerReload)}
         name="charForm"
-        action='/addChar'
+        action='/maker'
         method='POST'
         className='charForm'>
             <label htmlFor='name'>Name: </label>
             <input id='charName' type="text" name="name" placeholder='Char Name' />
-            <input className='makeCharSubmit' type='submit' value="Make Char" />
+            <label htmlFor='altName'>Alt. Names: </label>
+            <input id='altName' type="text" name="altName" placeholder='Char Name(s)' /><br></br><br></br>
+            <label htmlFor='path'>Path: </label>
+            <input id='path' type="text" name="path" placeholder='Path' />
+            <label htmlFor='type'>Type: </label>
+            <input id='type' type="text" name="type" placeholder='Type' />
+            <label htmlFor='assoc'>Association: </label>
+            <input id='assoc' type="assoc" name="assoc" placeholder='Associations' />
+            <label htmlFor='rarity'>Rarity: </label>
+            <input id='rarity' type="number" name="rarity" min={4} max={5} />
+            <input className='makeCharSubmit' type='submit' value="Add Char" />
         </form>
     );
 };
@@ -39,7 +54,7 @@ const CharList = (props) => {
 
     useEffect(() => {
         const loadCharsFromServer = async () => {
-            const response = await fetch('/addChar');
+            const response = await fetch('/maker');
             const data = await response.json();
             setChars(data.Chars);
         };

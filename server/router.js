@@ -4,7 +4,7 @@ const mid = require('./middleware');
 const router = (app) => {
   app.get('/getChars', mid.requiresLogin, controllers.Chars.getChars);
 
-  app.post('/addChar', mid.requiresLogin, controllers.Chars.findChars);
+  app.post('/findChars', mid.requiresLogin, controllers.Chars.findChars);
 
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);

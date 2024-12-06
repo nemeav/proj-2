@@ -47,11 +47,13 @@ const CharSchema = new mongoose.Schema({
 
 CharSchema.statics.toAPI = (doc) => ({
   name: doc.name,
+  alternateNames: doc.altName,
   path: doc.path,
   type: doc.type,
-  association: doc.association,
+  association: doc.assoc,
   rarity: doc.rarity,
+  link: doc.link,
 });
 
-const CharModel = mongoose.model('Char', CharSchema);
+const CharModel = mongoose.model('PlayersChars', CharSchema);
 module.exports = CharModel;
