@@ -68,19 +68,19 @@ const changePassword = (req, res) => {
     return res.status(400).json({ error: 'All fields required!' });
   }
 
-  // Authenticate the user with the old password
-  Account.authenticate(username, oldPw, async (err, account) => {
+  // authenticate
+  return Account.authenticate(username, oldPw, async (err, account) => {
     if (err || !account) {
       return res.status(401).json({ error: 'Wrong username or password!' });
     }
 
+    // if successful, create/encrypt new password
     try {
-      // Hash the new password
       const hash = await Account.generateHash(newPw);
 
-      // Update the account password
-      account.password = hash;
-      await account.save();
+      // mongo func to update account
+      // eslint did not like account.password =
+      await Account.updateOne({ _id: account._id }, { password: hash });
 
       return res.json({ message: 'Password changed successfully!' });
     } catch (error) {
