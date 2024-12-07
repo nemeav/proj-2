@@ -1,8 +1,10 @@
+// IMPORT
 const models = require('../models');
 
 // reformatted bc eslint hates me
 const { Account } = models;
 
+// LOGIN FUNCS
 const loginPage = (req, res) => res.render('login');
 
 const logout = (req, res) => {
@@ -29,13 +31,14 @@ const login = (req, res) => {
   });
 };
 
+// SIGNUP FUNCS
 const signup = async (req, res) => {
   const username = `${req.body.username}`;
   const pass = `${req.body.pass}`;
   const pass2 = `${req.body.pass2}`;
 
   if (!username || !pass || !pass2) {
-    return res.status(400).json({ error: 'All fields are required!' });
+    return res.status(400).json({ error: 'All fields required!' });
   }
 
   if (pass !== pass2) {
@@ -57,9 +60,40 @@ const signup = async (req, res) => {
   }
 };
 
+// PW FUNCS
+const changePassword = (req, res) => {
+  const { username, oldPw, newPw } = req.body;
+
+  if (!username || !oldPw || !newPw) {
+    return res.status(400).json({ error: 'All fields required!' });
+  }
+
+  // Authenticate the user with the old password
+  Account.authenticate(username, oldPw, async (err, account) => {
+    if (err || !account) {
+      return res.status(401).json({ error: 'Wrong username or password!' });
+    }
+
+    try {
+      // Hash the new password
+      const hash = await Account.generateHash(newPw);
+
+      // Update the account password
+      account.password = hash;
+      await account.save();
+
+      return res.json({ message: 'Password changed successfully!' });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Error changing password!' });
+    }
+  });
+};
+
 module.exports = {
   loginPage,
   login,
   logout,
   signup,
+  changePassword,
 };

@@ -96,7 +96,7 @@ nav:nth-child(1) {
 
 .mainForm {
     height: 300px;
-    width: 350px;
+    width: 500px;
     margin: 0 auto;
     padding-top: 350px;
     font-size: 1.2em;
@@ -108,10 +108,10 @@ nav:nth-child(1) {
 
 .mainForm label {
     display: inline-block;
-    width: 100px;
     margin-right: 25px;
     text-align: right;
     font-size: 1.2em;
+    margin-top: 10px;
 }
 
 .formSubmit {
@@ -121,11 +121,11 @@ nav:nth-child(1) {
     margin: 0 auto;
     margin-top: 14px;
     font-size: 1.2em;
-    width: 100px;
+    width: auto;
     background-color: #4B63A7;
-    border-radius: 2px;
+    border-radius: 8px;
     border-color: #66acee;
-    padding: 3px 0px;
+    padding: 3px 7px;
     color: white;
     text-decoration: none;
 }
@@ -139,7 +139,7 @@ nav:nth-child(1) {
     background-color: #3B88C6;
 }
 
-#user, #pass, #pass2 {
+#user, #pass, #pass2, #oldPw, #newPw, #newPw2 {
     text-align: center;
     font-size: 1.1em;
     width: 180px;
@@ -225,7 +225,7 @@ nav:nth-child(1) {
     background-color: #48A8D7;
 }
 
-img.domoFace {
+img.charPic {
     margin-left: 25px;
     margin-right: 10px;
     height: 50px;
@@ -243,18 +243,19 @@ h3.emptyChar {
     margin-top: 18px;
 }
 
-h3.charName {
+h3.charInfo {
     float:left;
-    width: 200px;
+    width: 350px;
     font-weight: bold;
     padding-left: 65px;
     font-size: 1.5em;
+    color: aliceblue;
 }
 
 .char:first-child {
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .char:last-child {
-    margin-bottom:10px;
+    margin-bottom:5px;
 }

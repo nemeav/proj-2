@@ -5,7 +5,7 @@ const CharModel = require('../models/Chars');
 const { Chars } = models;
 
 const makerPage = (req, res) => {
-  res.render('app');
+  res.render('app', { username: req.session.account.username });
 };
 
 const findChars = async (req, res) => {

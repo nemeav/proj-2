@@ -54,9 +54,9 @@ const CharList = (props) => {
 
     useEffect(() => {
         const loadCharsFromServer = async () => {
-            const response = await fetch('/maker');
+            const response = await fetch('/getChars');
             const data = await response.json();
-            setChars(data.Chars);
+            setChars(data.chars);
         };
         loadCharsFromServer();
     }, [props.reloadChars]);
@@ -72,8 +72,12 @@ const CharList = (props) => {
     const charNodes = chars.map(char => {
         return (
             <div key={char.id} className='char'>
-                <img src='/assets/img/domoface.jpeg' alt='domo face' className='domoFace' />
-                <h3 className='charName'>Name: {char.name}</h3>
+                <img src='/assets/img/default.jpg' alt='profile img' className='charPic' />
+                <h3 className='charInfo'>Name: {char.name}</h3>
+                <h3 className='charInfo'>Path: {char.path}</h3>
+                <h3 className='charInfo'>Type: {char.type}</h3>
+                <h3 className='charInfo'>Association: {char.association}</h3>
+                <h3 className='charInfo'> Rarity: {char.rarity}</h3>
             </div>
         );
     });
