@@ -8,6 +8,10 @@ const makerPage = (req, res) => {
   res.render('app', { username: req.session.account.username });
 };
 
+const findCharsPage = (req, res) => {
+  res.render('findChars', { username: req.session.account.username });
+};
+
 const makeChar = async (req, res) => {
   console.log(req.body);
   if (!req.body.name || !req.body.path || !req.body.type || !req.body.assoc || !req.body.rarity) {
@@ -37,27 +41,36 @@ const makeChar = async (req, res) => {
   }
 };
 
+const getRoster = async (req, res) => {
+  try {
+    const characters = await CharModel.find({ owner: req.session.account._id }).lean().exec();
+    res.render('roster', { username: req.session.account.username, characters });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Error retriving roster!' });
+  }
+};
+
 const findChars = async (req, res) => {
-  if (!req.body.name) {
+  const { name } = req.body;
+  if (!name) {
     return res.status(400).json({ error: 'Character name required to add to team!' });
   }
 
   try {
-    const { name } = req.body;
-
     const character = await models.Roster.findOne({ name }).lean().exec();
     if (!character) {
       return res.status(404).json({ error: 'Character not found! Check spelling/grammar' });
     }
 
     const query = { owner: req.session.account._id, name };
-    const existingChar = await models.Roster.findOne(query).lean().exec();
+    const existingChar = await models.Chars.findOne(query).lean().exec();
 
     if (existingChar) {
       return res.status(400).json({ error: 'Character is already in your roster!' });
     }
 
-    const newChar = new models.Roster({
+    const newChar = new models.Chars({
       name: character.name,
       type: character.type,
       path: character.path,
@@ -89,7 +102,9 @@ const getChars = async (req, res) => {
 
 module.exports = {
   makerPage,
+  findCharsPage,
   makeChar,
+  getRoster,
   findChars,
   getChars,
 };
