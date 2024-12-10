@@ -45,7 +45,7 @@ const handleSignup = (e) => {
 };
 
 
-const handleChangePassword = async (e) => { // async to add update message
+const handleChangePassword = async (e) => { // async to add update message, was being funky
   e.preventDefault();
   helper.hideError();
 
@@ -123,11 +123,11 @@ const ChangePasswordWindow = () => {
       <label htmlFor="user">Username: </label>
       <input id="user" type="text" name="username" placeholder="Enter username" />
       <label htmlFor="oldPw">Current Password: </label>
-      <input id="oldPw" type="text" name="oldPw" placeholder="Current password" /><br></br>
+      <input id="oldPw" type="password" name="oldPw" placeholder="Current password" /><br></br>
       <label htmlFor="newPw">New Password: </label>
-      <input id="newPw" type="text" name="newPw" placeholder="New password" />
+      <input id="newPw" type="password" name="newPw" placeholder="New password" />
       <label htmlFor="newPw2">New Password: </label>
-      <input id="newPw2" type="text" name="newPw2" placeholder="Confirm new password" />
+      <input id="newPw2" type="password" name="newPw2" placeholder="Confirm new password" />
       <input className="formSubmit" type="submit" value="Change Password" />
     </form>
   )

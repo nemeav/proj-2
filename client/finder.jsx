@@ -1,35 +1,37 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import helper from './helper';
+const helper = require('./helper.js');
+const React = require('react');
+const { createRoot } = require('react-dom/client');
 
-const FindCharForm = () => {
-  const handleFindChar = async (e) => {
+const handleFind = (e) => {
     e.preventDefault();
-    helper.hideError();
-
+    helper.hideError(); // Clear any previous error messages
+  
     const name = e.target.querySelector('#charName').value;
-
+  
     if (!name) {
-      helper.handleError('Character name required!');
+      helper.handleError('Character name required!'); // Display error if name is missing
       return false;
     }
-
+  
+    // Attempt to send data to the server
     helper.sendPost(e.target.action, { name });
+  
     return false;
   };
 
-  return (
-    <form id="findCharForm" onSubmit={handleFindChar} action="/findChars" method="POST">
-      <label htmlFor="charName">Character Name:</label>
-      <input id="charName" type="text" name="name" placeholder="Enter character" required />
-      <input type="submit" value="Add Character" />
-    </form>
-  );
-};
+  const FindCharForm = () => {
+    return (
+      <form id="findCharForm" onSubmit={handleFind} action="/findChars" method="POST">
+        <label htmlFor="charName">Character Name:</label>
+        <input id="charName" type="text" name="name" placeholder="Enter character" required />
+        <input type="submit" value="Add Character" />
+      </form>
+    );
+  };
 
 const init = () => {
-  const root = createRoot(document.getElementById('app'));
-  root.render(<FindCharForm />);
-};
-
-window.onload = init;
+    const root = createRoot(document.getElementById('app'));
+    root.render(<FindCharForm />);
+  };
+  
+  window.onload = init;
