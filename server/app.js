@@ -36,6 +36,10 @@ redisClient.connect().then(() => {
   app.use(helmet());
   app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted`)));
   app.use(favicon(`${__dirname}/../hosted/img/icon.png`));
+  app.use((req, res, next) => { // updating csp so i can use wiki imgs
+    res.setHeader('Content-Security-Policy', "img-src 'self' data: https://static.wikia.nocookie.net;");
+    next();
+  });
   app.use(compression());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());

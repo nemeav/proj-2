@@ -14,9 +14,16 @@ const CharList = (props) => {
   }
 
   const charNodes = chars.map(char => {
+    let imgSrc;
+    if (char.hasOwnProperty('link')) {
+      imgSrc = char.link;
+    } else {
+      imgSrc = '/assets/img/default.jpg';
+    }
+
     return (
       <div key={char._id} className='char'>
-        <img src='/assets/img/default.jpg' alt='profile img' className='charPic' />
+        <img src={imgSrc} alt='profile img' className='charPic' />
         <h3 className='charInfo'>Name: {char.name}</h3>
         <h3 className='charInfo'>Path: {char.path}</h3>
         <h3 className='charInfo'>Type: {char.type}</h3>

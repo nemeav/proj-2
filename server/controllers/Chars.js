@@ -20,7 +20,7 @@ const makeChar = async (req, res) => {
 
   const charData = {
     name: req.body.name,
-    alternateName: [],
+    alternateNames: [],
     path: req.body.path,
     type: req.body.type,
     association: req.body.assoc,
@@ -51,16 +51,27 @@ const getRoster = async (req, res) => {
   }
 };
 
+// pull chars from official hsr roster
 const findChars = async (req, res) => {
   const { name } = req.body;
   if (!name) {
     return res.status(400).json({ error: 'Character name required to add to team!' });
   }
 
+  // try to find character in roster
   try {
-    const character = await models.Roster.findOne({ name }).lean().exec();
+    let character = await models.Roster.findOne({ name }).lean().exec();
+    // check altNames
     if (!character) {
-      return res.status(404).json({ error: 'Character not found! Check spelling/grammar' });
+      const characterByAltName = await models.Roster.findOne({
+        alternateNames: { $in: [name] }, // https://www.mongodb.com/docs/manual/reference/operator/query/in/
+      }).lean().exec();
+
+      if (!characterByAltName) {
+        return res.status(404).json({ error: 'Character not found! Check spelling/grammar' });
+      }
+      // If found by alternate name, use this character
+      character = characterByAltName;
     }
 
     const query = { owner: req.session.account._id, name };
@@ -76,6 +87,7 @@ const findChars = async (req, res) => {
       path: character.path,
       association: character.association,
       rarity: character.rarity,
+      link: character.link,
       owner: req.session.account._id, // Link it to the signed-in user
     });
 
@@ -88,6 +100,7 @@ const findChars = async (req, res) => {
   }
 };
 
+// get all user's chars
 const getChars = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
