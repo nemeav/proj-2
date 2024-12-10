@@ -11,27 +11,15 @@
     <nav><a href="/login"><img id="logo" src="/assets/img/icon.png" alt="face logo" /></a>
         <div class="navlink">Hello, {{ username }}!</div>
         <div class="navlink"><a href="/findChars">Team Add</a></div>
-        <div class="navlink"><a href="/roster">Your Roster</a></div>
+        <div class="navlink"><a href="/maker">OC Maker</a></div>
         <div class="navlink"><a href="/logout">Log out</a></div>
     </nav>
 
     <h1>Welcome, {{username}}!</h1>
-    <h2>Your Characters:</h2>
-    <ul>
-        {{#each characters}}
-        <li>
-            {{!-- <img src="{{this.link}}" alt="{{this.name}}" /> --}}
-            <h3>{{this.name}}</h3>
-            <p>Path: {{this.path}}</p>
-            <p>Type: {{this.type}}</p>
-            <p>Association: {{this.association}}</p>
-            <p>Rarity: {{this.rarity}}</p>
-            <p>Date Added: {{this.addedDate}}</p>
-        </li>
-        {{else}}
-        <li>No characters found.</li>
-        {{/each}}
-    </ul>
+    <section id="app">
+
+  </section>
+  <script src="/assets/rosterBundle.js"></script>
 </body>
 
 </html>

@@ -8,7 +8,7 @@ const { createRoot } = require('react-dom/client');
 const handleLogin = (e) => {
   e.preventDefault();
   helper.hideError();
-
+  
   const username = e.target.querySelector('#user').value;
   const pass = e.target.querySelector('#pass').value;
 
@@ -24,7 +24,7 @@ const handleLogin = (e) => {
 const handleSignup = (e) => {
   e.preventDefault();
   helper.hideError();
-
+  
   const username = e.target.querySelector('#user').value;
   const pass = e.target.querySelector('#pass').value;
   const pass2 = e.target.querySelector('#pass2').value;
@@ -48,7 +48,7 @@ const handleSignup = (e) => {
 const handleChangePassword = async (e) => { // async to add update message, was being funky
   e.preventDefault();
   helper.hideError();
-
+  
   const username = e.target.querySelector('#user').value;
   const oldPw = e.target.querySelector('#oldPw').value;
   const newPw = e.target.querySelector('#newPw').value;
@@ -77,18 +77,20 @@ const handleChangePassword = async (e) => { // async to add update message, was 
 //FORMS/VIEWS
 const LoginWindow = (props) => {
   return (
-    <form id='loginForm' //dumb error bc eslint hates me in particular - does not effect program
-      name='loginForm'
-      onSubmit={handleLogin}
-      action='/login'
-      method='POST'
-      className='mainForm'>
-      <label htmlFor='username'>Username: </label>
-      <input id='user' type='text' name='username' placeholder='Enter name' /><br></br>
-      <label htmlFor='pass'>Password: </label>
-      <input id='pass' type='password' name='pass' placeholder='Enter password' />
-      <input className='formSubmit' type='submit' value='Sign in' />
-    </form>
+      
+      <form id='loginForm' //dumb error bc eslint hates me in particular - does not effect program
+        name='loginForm'
+        onSubmit={handleLogin}
+        action='/login'
+        method='POST'
+        className='mainForm'>
+        <label htmlFor='username'>Username: </label>
+        <input id='user' type='text' name='username' placeholder='Enter name' /><br></br>
+        <label htmlFor='pass'>Password: </label>
+        <input id='pass' type='password' name='pass' placeholder='Enter password' />
+        <input className='formSubmit' type='submit' value='Sign in' />
+      </form>
+    
   );
 };
 
@@ -138,27 +140,30 @@ const ChangePasswordWindow = () => {
 const init = () => {
   const loginButton = document.getElementById('loginButton');
   const signupButton = document.getElementById('signupButton');
-  const changePwButton = document.getElementById('changePwButton');
+  const pwButton = document.getElementById('changePwButton');
 
   const root = createRoot(document.getElementById('content'));
 
   loginButton.addEventListener('click', (e) => {
     e.preventDefault();
+    pwButton.hidden = false;
     root.render(<LoginWindow />);
     return false;
   });
 
   signupButton.addEventListener('click', (e) => {
     e.preventDefault();
-    root.render(<SignupWindow />);
+    pwButton.hidden = true;
+    root.render(<LoginWindow />);
     return false;
   });
 
-  changePwButton.addEventListener('click', (e) => {
+  pwButton.addEventListener('click', (e) => {
     e.preventDefault();
+    pwButton.hidden = true;
     root.render(<ChangePasswordWindow />);
     return false;
-  })
+  });
 
   root.render(<LoginWindow />);
 };

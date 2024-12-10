@@ -1,7 +1,6 @@
 const helper = require('./helper.js');
 const React = require('react');
 
-const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
 const handleChar = (e, onCharAdded) => {
@@ -20,14 +19,16 @@ const handleChar = (e, onCharAdded) => {
     return false;
   }
 
-  helper.sendPost(e.target.action, { name, altname, path, type, assoc, rarity }, onCharAdded);
+  helper.sendPost(e.target.action, { name, altname, path, type, assoc, rarity }, () => {
+    window.location.href = '/roster';
+  });
   return false;
 };
 
 const CharForm = (props) => {
     return(
         <form id='charForm' //not actuall error - eslint hates me
-        onSubmit={(e) => handleChar(e, props.triggerReload)}
+        onSubmit={handleChar}
         name="charForm"
         action='/maker'
         method='POST'
@@ -49,56 +50,11 @@ const CharForm = (props) => {
     );
 };
 
-const CharList = (props) => {
-    const [chars, setChars] = useState(props.chars);
-
-    useEffect(() => {
-        const loadCharsFromServer = async () => {
-            const response = await fetch('/getChars');
-            const data = await response.json();
-            setChars(data.chars);
-        };
-        loadCharsFromServer();
-    }, [props.reloadChars]);
-
-    if (chars.length === 0) {
-        return (
-            <div className='charList'>
-                <h3 className='emptyChar'>No Chars Yet!</h3>
-            </div>
-        );
-    }
-
-    const charNodes = chars.map(char => {
-        return (
-            <div key={char.id} className='char'>
-                <img src='/assets/img/default.jpg' alt='profile img' className='charPic' />
-                <h3 className='charInfo'>Name: {char.name}</h3>
-                <h3 className='charInfo'>Path: {char.path}</h3>
-                <h3 className='charInfo'>Type: {char.type}</h3>
-                <h3 className='charInfo'>Association: {char.association}</h3>
-                <h3 className='charInfo'> Rarity: {char.rarity}</h3>
-            </div>
-        );
-    });
-
-    return (
-        <div className='charList'>
-            {charNodes}
-        </div>
-    );
-};
-
 const App = () => {
-    const [reloadChars, setReloadChars] = useState(false);
-
     return (
         <div>
             <div id='makeChar'>
-                <CharForm triggerReload={() => setReloadChars(!reloadChars)} />
-            </div>
-            <div id='chars'>
-                <CharList chars={[]} reloadChars={reloadChars} />
+                <CharForm  />
             </div>
         </div>
     );
