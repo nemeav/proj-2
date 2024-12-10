@@ -47,7 +47,7 @@ const getRoster = async (req, res) => {
     res.render('roster', { username: req.session.account.username, characters });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: 'Error retriving roster!' });
+    res.status(500).json({ error: 'Error retrieving roster!' });
   }
 };
 

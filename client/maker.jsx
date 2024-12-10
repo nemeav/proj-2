@@ -16,7 +16,7 @@ const handleChar = (e, onCharAdded) => {
   const rarity = e.target.querySelector('#rarity').value;
 
   if (!name || !path || !type || !assoc || !rarity) {
-    helper.handleError('Field required');
+    helper.handleError('Name, Path, Type, Association, and Rarity required!');
     return false;
   }
 

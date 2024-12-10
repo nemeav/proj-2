@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>HSR Guestbook</title>
+    <link rel="shortcut icon" href="/assets/img/icon.png" />
+    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+</head>
+
+<body>
+    <nav><a href="/login"><img id="logo" src="/assets/img/icon.png" alt="face logo" /></a>
+        <div class="navlink">Hello, {{ username }}!</div>
+        <div class="navlink"><a href="/findChars">Team Add</a></div>
+        <div class="navlink"><a href="/roster">Your Roster</a></div>
+        <div class="navlink"><a href="/logout">Log out</a></div>
+    </nav>
+
+    <h2>Find and Add a Character:</h2>
+
+    <section id="app">
+
+  </section>
+
+    <small>Note: This is for official characters! For making OCs, please check <a href="/maker">Maker</a></small>
+
+    <div id="charMessage" class="hidden">
+        <h3><span id="errorMessage"></span></h3>
+    </div>
+<script src="/assets/finderBundle.js"></script>
+</body>
+
+</html>
