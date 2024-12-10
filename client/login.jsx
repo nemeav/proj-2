@@ -44,7 +44,8 @@ const handleSignup = (e) => {
   return false;
 };
 
-const handleChangePassword = (e) => {
+
+const handleChangePassword = async (e) => { // async to add update message
   e.preventDefault();
   helper.hideError();
 
@@ -63,7 +64,12 @@ const handleChangePassword = (e) => {
     return false;
   }
 
-  helper.sendPost('/changePassword', { username, oldPw, newPw});
+  const res = await helper.sendPost('/changePassword', { username, oldPw, newPw });
+
+  if (res.ok) {
+    console.log(res.message);
+    window.location.href = '/login';
+  }
   return false;
 }
 
@@ -89,18 +95,18 @@ const LoginWindow = (props) => {
 const SignupWindow = (props) => {
   return (
     <form id='signupForm'
-    name = 'signupForm'
-    onSubmit = { handleSignup }
-    action = '/signup'
-    method = 'POST'
-    className = "mainForm">
-    <label htmlFor='username'>Username: </label>
-    <input id='user' type='text' name='username' placeholder='Enter username' /><br></br>
-    <label htmlFor="pass">Password: </label>
-    <input id='pass' type='password' name='pass' placeholder='Enter password' />
-    <label htmlFor='pass'>Password: </label>
-    <input id='pass2' type='password' name='pass2' placeholder='Retype password' />
-    <input className='formSubmit' type="submit" value="Sign up" />
+      name='signupForm'
+      onSubmit={handleSignup}
+      action='/signup'
+      method='POST'
+      className="mainForm">
+      <label htmlFor='username'>Username: </label>
+      <input id='user' type='text' name='username' placeholder='Enter username' /><br></br>
+      <label htmlFor="pass">Password: </label>
+      <input id='pass' type='password' name='pass' placeholder='Enter password' /><br></br>
+      <label htmlFor='pass'>Password: </label>
+      <input id='pass2' type='password' name='pass2' placeholder='Retype password' />
+      <input className='formSubmit' type="submit" value="Sign up" />
     </form>
   );
 };
@@ -108,11 +114,11 @@ const SignupWindow = (props) => {
 const ChangePasswordWindow = () => {
   return (
     <form id='changePasswordForm'
-    name='changePasswordForm'
-    onSubmit={handleChangePassword}
-    action='/changePassword'
-    method='POST'
-    className='mainForm'
+      name='changePasswordForm'
+      onSubmit={handleChangePassword}
+      action='/changePassword'
+      method='POST'
+      className='mainForm'
     >
       <label htmlFor="user">Username: </label>
       <input id="user" type="text" name="username" placeholder="Enter username" />
@@ -120,7 +126,7 @@ const ChangePasswordWindow = () => {
       <input id="oldPw" type="text" name="oldPw" placeholder="Current password" /><br></br>
       <label htmlFor="newPw">New Password: </label>
       <input id="newPw" type="text" name="newPw" placeholder="New password" />
-      <label htmlFor="newPw2">Confirm Password: </label>
+      <label htmlFor="newPw2">New Password: </label>
       <input id="newPw2" type="text" name="newPw2" placeholder="Confirm new password" />
       <input className="formSubmit" type="submit" value="Change Password" />
     </form>
@@ -138,23 +144,23 @@ const init = () => {
 
   loginButton.addEventListener('click', (e) => {
     e.preventDefault();
-    root.render( <LoginWindow /> );
+    root.render(<LoginWindow />);
     return false;
   });
 
   signupButton.addEventListener('click', (e) => {
     e.preventDefault();
-    root.render( <SignupWindow /> );
+    root.render(<SignupWindow />);
     return false;
   });
 
   changePwButton.addEventListener('click', (e) => {
     e.preventDefault();
-    root.render( <ChangePasswordWindow /> );
+    root.render(<ChangePasswordWindow />);
     return false;
   })
 
-  root.render( <LoginWindow /> );
+  root.render(<LoginWindow />);
 };
 
 window.onload = init;

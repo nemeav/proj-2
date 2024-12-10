@@ -34,6 +34,10 @@ const sendPost = async (url, data, handler) => {
   if (handler) {
     handler(result);
   }
+
+  if (result.message) {
+    message = result.message;
+  }
 };
 
 const hideError = () => {

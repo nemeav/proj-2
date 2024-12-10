@@ -82,7 +82,7 @@ const changePassword = (req, res) => {
       // eslint did not like account.password =
       await Account.updateOne({ _id: account._id }, { password: hash });
 
-      return res.json({ message: 'Password changed successfully!' });
+      return res.json({ message: 'Password changed successfully!', redirect: '/login' });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ error: 'Error changing password!' });
