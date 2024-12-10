@@ -23,7 +23,7 @@ const handleFind = (e) => {
     return (
       <form id="findCharForm" onSubmit={handleFind} action="/findChars" method="POST">
         <label htmlFor="charName">Character Name:</label>
-        <input id="charName" type="text" name="name" placeholder="Enter character" required />
+        <input id="charName" type="text" name="name" placeholder="Enter character" />
         <input type="submit" value="Add Character" />
       </form>
     );

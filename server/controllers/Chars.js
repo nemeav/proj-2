@@ -67,7 +67,7 @@ const findChars = async (req, res) => {
     const existingChar = await models.Chars.findOne(query).lean().exec();
 
     if (existingChar) {
-      return res.status(400).json({ error: 'Character is already in your roster!' });
+      return res.status(400).json({ error: 'Character already in roster!' });
     }
 
     const newChar = new models.Chars({
@@ -81,7 +81,7 @@ const findChars = async (req, res) => {
 
     await newChar.save();
 
-    return res.status(201).json({ message: 'Character added!', character: newChar });
+    return res.status(201).json({ message: 'Character added!', redirect: '/roster' });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: 'An error occurred while adding character' });
