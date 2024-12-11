@@ -3,7 +3,7 @@ const React = require('react');
 const { createRoot } = require('react-dom/client');
 
 const CharList = (props) => {
-  const { chars } = props;
+  const { chars, isPremium } = props;
 
   if (chars.length === 0) {
     return (
@@ -27,8 +27,14 @@ const CharList = (props) => {
         <h3 className='charInfo'>Name: {char.name}</h3>
         <h3 className='charInfo'>Path: {char.path}</h3>
         <h3 className='charInfo'>Type: {char.type}</h3>
-        <h3 className='charInfo'>Association: {char.association}</h3>
-        <h3 className='charInfo'> Rarity: {char.rarity}</h3>
+
+        {isPremium && (
+          <>
+            <h3 className='charInfo'>Association: {char.association}</h3>
+            <h3 className='charInfo'>Rarity: {char.rarity}</h3>
+            <h3 className='charInfo'>Date Added: {char.addedDate}</h3>
+          </>
+        )}
       </div>
     );
   });
@@ -42,6 +48,7 @@ const CharList = (props) => {
 
 const RosterPage = () => {
   const [chars, setChars] = React.useState([]);
+  const [isPremium, setIsPremium] = React.useState(false);
 
   React.useEffect(() => {
     const loadCharsFromServer = async () => {
@@ -53,10 +60,22 @@ const RosterPage = () => {
     loadCharsFromServer();
   }, []);
 
+  const handleTogglePremium = () => {
+    setIsPremium(!isPremium);
+  };
+
   return (
     <div>
       <h2>Your Character Roster</h2>
-      <CharList chars={chars} />
+      <label htmlFor="premiumToggle">Premium View:</label>
+      <input
+        type="checkbox"
+        id="premiumToggle"
+        checked={isPremium}
+        onChange={handleTogglePremium}
+      />
+
+      <CharList chars={chars} isPremium={isPremium} />
     </div>
   );
 };

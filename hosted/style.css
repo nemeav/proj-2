@@ -15,6 +15,7 @@ body {
     height: 40px;
     width: 40;
     padding-top: 18px;
+    padding-left: 25px;
     float: left;
     border-radius: 8px;
 }
@@ -22,17 +23,18 @@ body {
 nav {
     width: 100%;
     height: 75px;
+    filter: drop-shadow(0 1px 3px #2a375d);
     background-color: #4B63A7;
 }
 
 .navstrip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 50px;
-    background-color:#48A8D7;
-}
-
-nav:nth-child(1) {
-    padding-left: 25px;
+    background-color: #48A8D7;
+    padding: 0;
 }
 
 .navlink {
@@ -45,18 +47,14 @@ nav:nth-child(1) {
 }
 
 .navstrip.navlink {
-    padding: 0px;
-    padding-top: 0px;
-    padding-left: 0px;
+    padding: 0 0;
     color: white;
     font-size: 1.3em;
-    align-items: center;
 }
 
 .navlink a,
 .navlink a:link,
 .navlink a:visited,
-.navlink a:hover,
 .navlink a:active {
     color: white;
     text-decoration: none;
@@ -69,45 +67,56 @@ nav:nth-child(1) {
     color: #E8CE9A;
 }
 
-.charForm {
-    border: 2px solid #3B88C6;
-    height: 70px;
-    width: 100%;
-    margin-top: 0px;
-    padding-top: 10px;
-    background-color: #4B63A7;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
+#logout {
+    float: right;
+    padding-right: 50px;
 }
 
-.charForm label {
-    display: inline-block;
+#app {
+    margin-top: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+.charForm, #findCharForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #4B63A7;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    filter: drop-shadow(0px 1px 3px #2a375d);
+}
+
+#findCharForm h2 {
+    color: aliceblue;
+}
+
+.charForm label, #findCharForm label {
     margin-left: 10px;
     margin-right: 5px;
     font-size: 1.2em;
-    float: left;
     color: white;
 }
 
-.charForm input[type=text] {
-    float: left;
+.charForm input[type=text], #findCharForm input[type=text]{
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
 }
 
-.makeCharSubmit {
+.makeCharSubmit, #findCharForm input[type=submit] {
     transition: background-color 0.4s ease;
-    display: inline;
-    width: 90px;
+    width: 100px;
     background-color: #4B63A7;
     border-radius: 2px;
+    border-color: #2a375d;
     color: white;
     text-decoration: none;
-}
-
-.makeCharSubmit:link,
-.makeCharSubmit:visited,
-.makeCharSubmit:hover,
-.makeCharSubmit:active {
-    color: white;
 }
 
 .makeCharSubmit:hover {
@@ -135,7 +144,7 @@ nav:nth-child(1) {
     margin-top: 10px;
 }
 
-.formSubmit {
+.formSubmit, #changePwButton {
     transition: background-color 0.4s ease;
     display: block;
     text-align: center;
@@ -151,11 +160,13 @@ nav:nth-child(1) {
     text-decoration: none;
 }
 
-.formSubmit:link,
-.formSubmit:visited,
-.formSubmit:hover,
-.formSubmit:active {
-    color: white;
+#changePwButton {
+    margin: 0 30vw;
+}
+
+small {
+    left: 38%;
+    position: fixed;
 }
 
 .formSubmit:hover {
@@ -187,25 +198,21 @@ nav:nth-child(1) {
 }
 
 #charMessage {
-    top: 250px;
-    width: 250px;
-    height: 650px;
-    position: absolute;
+    bottom: 0;
+    left: 45%;
+    position: fixed;
     z-index: 200;
-    right: 0px;
-    overflow: hidden;
 }
 
 #charMessage h3 {
     width: 200px;
     position: absolute;
-    top: 0px;
-    left: 20px;
+    left: 0;
 }
 
 .feedback-message {
     margin-top: 10px;
-    padding: 10px;
+    padding: 0px;
     border-radius: 4px;
     font-size: 14px;
 }
@@ -216,41 +223,21 @@ nav:nth-child(1) {
     border: 1px solid #c3e6cb;
 }
 
-#speech {
-    height: 120px;
-    width: 250px;
-    z-index: 300;
-}
-
 #errorMessage {
     font-size: 1.2em;
     font-weight: bold;
     color: red;
     font-style: italic;
+    left: 0;
 }
 
 #char {
     z-index: 225;
-    margin-top: -20px;
-    margin-left: 135px;
-    height: 450px;
-    width: 300px;
-    -ms-transform: rotate(330deg);
-    -webkit-transform: rotate(330deg);
-    transform: rotate(330deg);
-}
-
-#chars {
-    width: 40%;
-    min-width: 400px;
-    border: 2px solid #4B63A7;
-    border-radius: 4px;
-    margin: 0 auto;
-    margin-top: 100px;
+    width: 200px;
 }
 
 .char {
-    width: 95%;
+    width: 65%;
     margin: 0 auto;
     margin-top: 2px;
     margin-bottom: 2px;
@@ -272,8 +259,8 @@ nav:nth-child(1) {
 img.charPic {
     margin-left: 25px;
     margin-right: 10px;
-    height: 75px;
-    width: 75px;
+    height: 100px;
+    width: 100px;
     border-radius: 4px;
     margin-top: 10px;
     float: left;

@@ -25,6 +25,7 @@ const makeChar = async (req, res) => {
     type: req.body.type,
     association: req.body.assoc,
     rarity: req.body.rarity,
+    addedDate: Date.now(),
     owner: req.session.account._id,
   };
 
@@ -68,7 +69,7 @@ const findChars = async (req, res) => {
       }).lean().exec();
 
       if (!characterByAltName) {
-        return res.status(404).json({ error: 'Character not found! Check spelling/grammar' });
+        return res.status(404).json({ error: 'Character not found! Check spelling/capitals' });
       }
       // If found by alternate name, use this character
       character = characterByAltName;
@@ -88,6 +89,7 @@ const findChars = async (req, res) => {
       association: character.association,
       rarity: character.rarity,
       link: character.link,
+      addedDate: Date.now(),
       owner: req.session.account._id, // Link it to the signed-in user
     });
 

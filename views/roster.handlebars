@@ -1,24 +1,24 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <title>HSR Guestbook</title>
-    <link rel="shortcut icon" href="/assets/img/icon.png" />
-    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <meta charset="utf-8" />
+  <title>HSR Guestbook</title>
+  <link rel="shortcut icon" href="/assets/img/icon.png" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
 </head>
 
 <body>
-    <nav><a href="/login"><img id="logo" src="/assets/img/icon.png" alt="face logo" /></a>
+  <nav><a href="/login"><img id="logo" src="/assets/img/icon.png" alt="face logo" /></a>
     <div class="navlink">Hello, {{ username }}!</div>
-    <div class="navlink"><a href="/logout">Log out</a></div>
+    <div class="navlink" id="logout"><a href="/logout">Log out</a></div>
   </nav>
   <div class="navstrip">
     <div class="navlink"><a href="/findChars">Team Add</a></div>
     <div class="navlink"><a href="/maker">OC Maker</a></div>
   </div>
 
-    <h1>Welcome, {{username}}!</h1>
-    <section id="app">
+  <h1>Welcome, {{username}}!</h1>
+  <section id="app">
 
   </section>
   <script src="/assets/rosterBundle.js"></script>

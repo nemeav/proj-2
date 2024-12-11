@@ -1,34 +1,34 @@
 <html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <title>HSR Guestbook</title>
-  <link rel="shortcut icon" href="/assets/img/icon.png"/>
-  <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+  <link rel="shortcut icon" href="/assets/img/icon.png" />
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
 </head>
-<body> 
+
+<body>
   <nav><a href="/login"><img id="logo" src="/assets/img/icon.png" alt="face logo" /></a>
-    <div class="navlink">Hello, {{ username }}!</div>
-    <div class="navlink"><a href="/logout">Log out</a></div>
+    <div class="navlink"><a id="loginButton" href="/login">Login</a></div>
+    <div class="navlink"><a id="signupButton" href="/signup">Sign up</a></div>
   </nav>
-  <div class="navstrip">
-    <div class="navlink"><a href="/findChars">Team Add</a></div>
-    <div class="navlink"><a href="/maker">OC Maker</a></div>
-  </div>
-  
+
   <section id="content">
-    
+
   </section>
 
-  <div><a id="changePwButton" href="/changePassword">Change Password</a></div>
-  
+  <div><a id="changePwButton" href="/changePassword" class="hidden">Change Password</a></div>
+
   <div id="charMessage" class='hidden'>
-    <img id="speech" src="/assets/img/speech.png" alt="speech box"/>
     <h3><span id="errorMessage"></span></h3>
-    <img id="char" src="assets/img/wrong_pompom.jpg" alt="pompom"/>
+    <img id="char" src="assets/img/wrong_pompom.png" alt="pompom" />
   </div>
   <script src="/assets/loginBundle.js"></script>
 </body>
+
 </html>

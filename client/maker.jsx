@@ -36,13 +36,13 @@ const CharForm = (props) => {
             <label htmlFor='name'>Name: </label>
             <input id='charName' type="text" name="name" placeholder='Char Name' />
             <label htmlFor='altName'>Alt. Names: </label>
-            <input id='altName' type="text" name="altName" placeholder='Char Name(s)' /><br></br><br></br>
+            <input id='altName' type="text" name="altName" placeholder='Char Name(s)' />
             <label htmlFor='path'>Path: </label>
             <input id='path' type="text" name="path" placeholder='Path' />
             <label htmlFor='type'>Type: </label>
             <input id='type' type="text" name="type" placeholder='Type' />
             <label htmlFor='assoc'>Association: </label>
-            <input id='assoc' type="assoc" name="assoc" placeholder='Associations' />
+            <input id='assoc' type="text" name="assoc" placeholder='Associations' />
             <label htmlFor='rarity'>Rarity: </label>
             <input id='rarity' type="number" name="rarity" min={4} max={5} />
             <input className='makeCharSubmit' type='submit' value="Add Char" />

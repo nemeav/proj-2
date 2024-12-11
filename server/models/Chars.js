@@ -41,7 +41,6 @@ const CharSchema = new mongoose.Schema({
   },
   addedDate: {
     type: Date,
-    default: Date.now,
   },
 });
 
@@ -53,6 +52,7 @@ CharSchema.statics.toAPI = (doc) => ({
   association: doc.assoc,
   rarity: doc.rarity,
   link: doc.link,
+  addedDate: doc.addedDate,
 });
 
 const CharModel = mongoose.model('PlayersChars', CharSchema);
