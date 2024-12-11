@@ -71,7 +71,7 @@ const findChars = async (req, res) => {
       if (!characterByAltName) {
         return res.status(404).json({ error: 'Character not found! Check spelling/capitals' });
       }
-      // If found by alternate name, use this character
+      // if found by alternate name, use character
       character = characterByAltName;
     }
 
@@ -90,7 +90,7 @@ const findChars = async (req, res) => {
       rarity: character.rarity,
       link: character.link,
       addedDate: Date.now(),
-      owner: req.session.account._id, // Link it to the signed-in user
+      owner: req.session.account._id, // link it to signed-in user
     });
 
     await newChar.save();

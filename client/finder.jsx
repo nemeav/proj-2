@@ -4,16 +4,15 @@ const { createRoot } = require('react-dom/client');
 
 const handleFind = (e) => {
   e.preventDefault();
-  helper.hideError(); // Clear any previous error messages
+  helper.hideError();
 
   const name = e.target.querySelector('#charName').value;
 
   if (!name) {
-    helper.handleError('Character name required!'); // Display error if name is missing
+    helper.handleError('Character name required!');
     return false;
   }
 
-  // Attempt to send data to the server
   helper.sendPost(e.target.action, { name });
 
   return false;
